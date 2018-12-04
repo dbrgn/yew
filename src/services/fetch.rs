@@ -25,12 +25,23 @@ pub enum Credentials {
     SameOrigin,
 }
 
+/// Fetch mode.
+#[derive(Serialize)]
+#[serde(rename_all = "kebab-case")]
+pub enum Mode {
+    Cors,
+    NoCors,
+    SameOrigin,
+}
+
 /// Init options for `fetch()` function call.
 /// https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch
 #[derive(Serialize)]
 pub struct FetchOptions {
     /// Credentials of a fetch request.
     pub credentials: Option<Credentials>,
+    /// The mode you want to use for the request
+    pub mode: Option<Mode>,
 }
 
 /// Represents errors of a fetch service.
