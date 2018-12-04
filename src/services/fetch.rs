@@ -28,10 +28,26 @@ pub enum Credentials {
 /// Fetch mode.
 #[derive(Serialize)]
 #[serde(rename_all = "kebab-case")]
-pub enum Mode {
+pub enum RequestMode {
     Cors,
     NoCors,
     SameOrigin,
+}
+
+/// The cache read-only property of the Request interface contains the cache
+/// mode of the request. It controls how the request will interact with the
+/// browser's HTTP cache.
+///
+/// See https://developer.mozilla.org/en-US/docs/Web/API/Request/cache
+#[derive(Serialize)]
+#[serde(rename_all = "kebab-case")]
+pub enum CacheMode {
+    Default,
+    NoStore,
+    Reload,
+    NoCache,
+    ForceCache,
+    OnlyIfCached,
 }
 
 /// Init options for `fetch()` function call.
@@ -41,7 +57,9 @@ pub struct FetchOptions {
     /// Credentials of a fetch request.
     pub credentials: Option<Credentials>,
     /// The mode you want to use for the request
-    pub mode: Option<Mode>,
+    pub mode: Option<RequestMode>,
+    /// The cache mode you want to use for the request
+    pub cache: Option<CacheMode>,
 }
 
 /// Represents errors of a fetch service.
